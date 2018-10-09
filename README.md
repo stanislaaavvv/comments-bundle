@@ -1,2 +1,2 @@
 # comments-bundle
-Comment section made with symphony2.8
+Comment section made with symphony 2.8
