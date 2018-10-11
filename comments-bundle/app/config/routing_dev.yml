@@ -9,6 +9,8 @@ _profiler:
 _errors:
     resource: '@TwigBundle/Resources/config/routing/errors.xml'
     prefix: /_error
-
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
 _main:
     resource: routing.yml
