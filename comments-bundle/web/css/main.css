@@ -134,3 +134,11 @@ body {
 	width:70%;
 	margin-left:30%;
 }
+
+.hidden {
+	display: none;
+}
+
+.liked {
+	color: black;
+}

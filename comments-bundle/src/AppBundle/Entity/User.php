@@ -1,35 +1,39 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
+
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * User
+ *
  * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-
-class User extends BaseUser
+class User
 {
-     /**
-     * @ORM\Column(type="integer")
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @var int
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
- 
-    protected $id;
+    private $id;
 
-     /**
-     * @ORM\Column(type="text")
+    /**
      * @var string
+     *
+     * @ORM\Column(name="name", type="text", precision=0, scale=0, nullable=false, unique=false)
      */
     private $name;
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -60,4 +64,3 @@ class User extends BaseUser
         return $this->name;
     }
 }
-

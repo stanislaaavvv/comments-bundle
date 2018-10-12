@@ -12,4 +12,63 @@ use AppBundle\Entity\Comment;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function fetchActiveComments() {
+
+		$comments_list = $this->getEntityManager()
+		             ->createQuery(
+		                'SELECT comments.id FROM AppBundle:Comment comments WHERE comments.isActive = :active AND comments.replyToId = :rpl_to_id'
+		             )
+		             ->setParameter('active',1)
+		             ->setParameter('rpl_to_id',-1)
+		             ->getResult();
+
+		return $comments_list;
+
+	}
+
+	public function fetchReplyToComments($comment_id) {
+
+		$comments_list = $this->getEntityManager()
+		             ->createQuery(
+		                'SELECT comments FROM AppBundle:Comment comments WHERE comments.isActive = :active AND comments.replyToId = :reply_to_id'
+		             )
+		             ->setParameter('active',1)
+		             ->setParameter('reply_to_id',$comment_id)
+		             ->getResult();
+
+		return $comments_list;
+	}
+
+	public function hasReplyComments($comment_id) {
+
+		
+        $comments_list = $this->getEntityManager()
+		             ->createQuery(
+		                'SELECT comments.id FROM AppBundle:Comment comments WHERE comments.isActive = :active AND comments.replyToId = :reply_to_id'
+		             )
+		             ->setParameter('active',1)
+		             ->setParameter('reply_to_id',$comment_id)
+		             ->getResult();
+
+		$response      = (count($comments_list) > 0 ) ? true : false;
+
+		return $response;            
+    }
+
+    public function commentIsLiked($user_id,$comment_id) {
+    	
+    	$reaction_list = $this->getEntityManager()
+		             ->createQuery(
+		                'SELECT reaction.id FROM AppBundle:Reaction reaction WHERE reaction.userId = :user_id AND reaction.commentId = :comment_id
+		                 AND reaction.type = :reaction_type'
+		             )
+		             ->setParameter('user_id',$user_id)
+		             ->setParameter('comment_id',$comment_id)
+		             ->setParameter('reaction_type',"like")
+		             ->getResult();
+
+		$response      = (count($reaction_list) > 0 ) ? true : false;
+
+		return $response;
+    }	
 }

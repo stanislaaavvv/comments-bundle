@@ -1,69 +1,81 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * Comment
+ *
  * @ORM\Table(name="comments")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-
 class Comment
 {
     /**
-     * @ORM\Column(type="integer")
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @var int
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text")
      * @var string
+     *
+     * @ORM\Column(name="content", type="text", precision=0, scale=0, nullable=false, unique=false)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="creator_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
     private $creatorId;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="is_active", type="smallint", precision=0, scale=0, nullable=false, unique=false)
      */
     private $isActive;
 
     /**
-     * @ORM\Column(type="datetime")
      * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", precision=0, scale=0, nullable=false, unique=false)
      */
     private $created;
 
     /**
-     * @ORM\Column(type="smallint")
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="is_updated", type="smallint", precision=0, scale=0, nullable=false, unique=false)
      */
     private $isUpdated;
 
     /**
-     * @ORM\Column(type="datetime")
      * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", precision=0, scale=0, nullable=false, unique=false)
      */
     private $updated;
 
-     /**
-     * @ORM\Column(type="integer")
-     * @var int
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="reply_to_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
     private $replyToId;
+
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -101,7 +113,7 @@ class Comment
      *
      * @return Comment
      */
-    public function setcreatorId($creatorId)
+    public function setCreatorId($creatorId)
     {
         $this->creatorId = $creatorId;
 
@@ -111,9 +123,9 @@ class Comment
     /**
      * Get creatorId
      *
-     * @return int
+     * @return integer
      */
-    public function getcreatorId()
+    public function getCreatorId()
     {
         return $this->creatorId;
     }
@@ -135,7 +147,7 @@ class Comment
     /**
      * Get isActive
      *
-     * @return int
+     * @return integer
      */
     public function getIsActive()
     {
@@ -183,7 +195,7 @@ class Comment
     /**
      * Get isUpdated
      *
-     * @return int
+     * @return integer
      */
     public function getIsUpdated()
     {
@@ -213,5 +225,28 @@ class Comment
     {
         return $this->updated;
     }
-}
 
+    /**
+     * Set replyToId
+     *
+     * @param integer $replyToId
+     *
+     * @return Comment
+     */
+    public function setReplyToId($replyToId)
+    {
+        $this->replyToId = $replyToId;
+
+        return $this;
+    }
+
+    /**
+     * Get replyToId
+     *
+     * @return integer
+     */
+    public function getReplyToId()
+    {
+        return $this->replyToId;
+    }
+}

@@ -36,13 +36,17 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
 	public function fetchDefaultUserId() {
 
-		return $this->getEntityManager()
-            ->createQuery(
-                'SELECT users.id FROM AppBundle:User users WHERE users.name = :name '
-            )
-            ->setParameter('name','You')
-            ->setMaxResults(1)
-            ->getResult();
+		$default_user_records =  $this->getEntityManager()
+							            ->createQuery(
+							                'SELECT users.id FROM AppBundle:User users WHERE users.name = :name '
+							            )
+							            ->setParameter('name','You')
+							            ->setMaxResults(1)
+							            ->getResult();
+							            
+		return $default_user_records[0]['id'];					            
+
+
 
 	}
 

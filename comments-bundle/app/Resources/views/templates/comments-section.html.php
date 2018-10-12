@@ -1,134 +1,126 @@
 <!-- used from https://codepen.io/arihamzah/pen/VebNXG
  -->
 <!-- comments container -->
+<?php function dumpData($data) { echo $data; }?>
 <head>
-  <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+  <link rel="stylesheet" href="<?php dumpData($view['assets']->getUrl('css/main.css'))?>" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <div class="comment_block">
 
-<!-- 
-	Comments are structured in the following way:
+	 <div class="create_new_comment">
 
-	{ul} defines a new comment (singular)
-	{li} defines a new reply to the comment {ul}
-
-	example:
-
-	<ul>
-		<comment>
-			
-		</comment
-
-			<li>
-				<reply>
-
-				</reply>
-			</li>
-
-			<li>
-				<reply>
-
-				</reply>
-			</li>
-
-			<li>
-				<reply>
-
-				</reply>
-			</li>
-	</ul>
-
- -->
-
- <!-- used by #{user} to create a new comment -->
- <div class="create_new_comment">
-
-	<!-- current #{user} avatar -->
- 	<div class="user_avatar">
- 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/73.jpg">
- 	</div><!-- the input field --><div class="input_comment">
- 		<input type="text" placeholder="Join the conversation..">
- 	</div>
-
- </div>
-
-
- <!-- new comment -->
- <div class="new_comment">
-
-	<!-- build comment -->
- 	<ul class="user_comment">
-
- 		<!-- current #{user} avatar -->
+		
 	 	<div class="user_avatar">
-	 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg">
-	 	</div><!-- the comment body --><div class="comment_body">
-	 		<p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
+	 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/73.jpg">
+	 	</div><div class="input_comment">
+	 		<input id="create_comment_input" type="text" placeholder="Join the conversation..">
 	 	</div>
 
-	 	<!-- comments toolbar -->
-	 	<div class="comment_toolbar">
+	 </div>
 
-	 		<!-- inc. date and time -->
-	 		<div class="comment_details">
-	 			<ul>
-	 				<li><i class="fa fa-clock-o"></i> 13:94</li>
-	 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
-	 				<li><i class="fa fa-pencil"></i> <span class="user">John Smith</span></li>
-	 			</ul>
-	 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-	 			<ul>
-	 			
-	 				<li><i class="fa fa-edit fa-2x"></i></li>
-	 				<li><i class="fa fa-trash fa-2x"></i></li>
-	 				<li><i class="fa fa-reply fa-2x"></i></li>
-	 				<li><i class="fa fa-thumbs-up fa-2x"></i></li>
-	 			</ul>
-	 		</div>
 
-	 	</div>
+	 
+	 <div class="new_comment">
+		<?php dumpData($comments)?>
+	 </div>
 
-	 	<!-- start user replies -->
-	 	<li class="reply_body">
+
 	 		
-	 		<!-- current #{user} avatar -->
-		 	<div class="user_avatar">
-		 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/manugamero/73.jpg">
-		 	</div><!-- the comment body --><div class="comment_body">
-		 		<p>That's exactly what I was thinking!</p>
-		 	</div>
-
-		 	<!-- comments toolbar -->
-		 	<div class="comment_toolbar">
-
-		 		<!-- inc. date and time -->
-		 		<div class="comment_details">
-		 			<ul>
-		 				<li><i class="fa fa-clock-o"></i> 14:52</li>
-		 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
-		 				<li><i class="fa fa-pencil"></i> <span class="user">Andrew Johnson</span></li>
-		 			</ul>
-		 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-		 			<ul>
-		 				<li><i class="fa fa-share-alt"></i></li>
-		 				<li><i class="fa fa-reply"></i></li>
-		 				<li><i class="fa fa-heart love"><span class="love_amt"> 4</span></i></li>
-		 			</ul>
-		 		</div>
-
-		 	</div>
-
-
-	 	</li>
-
- 	
-
- 	</ul>
-
- </div>
-
-
-	 		<!-- <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/73.jpg"> -->
 	 
 
 </div>
+<script type="text/javascript">
+(function() {
+
+	//FUNCTIONS
+	function addComment() {
+
+		var content = $("#create_comment_input").val();
+
+		if (content == "") {
+			return;
+		}
+
+		$.ajax({
+		  url: "add/comment/"+content,
+		}).done(function(data) {
+		  	reloadComments();
+		});
+	}
+
+	function reloadComments() {
+
+		$.ajax({
+		  url: "comments/reload",
+		}).done(function(data) {
+			
+			$('.new_comment').empty();
+			$('.new_comment').append(data);
+		  	clearAddInput(); 
+		  	bindEvents();
+		});
+	}
+
+	function deleteComment(comment_id) {
+
+		if (comment_id < 0) {
+			return;
+		}
+
+		$.ajax({
+		  url: "delete/comment/"+comment_id,
+		}).done(function(data) {
+		  	reloadComments();
+		});
+	}
+
+	function addReaction(comment_id) {
+
+		$.ajax({
+		  url: "add/reaction/"+comment_id,
+		}).done(function(data) { 
+		  	reloadComments();
+		});
+
+	}
+
+
+	function clearAddInput() {
+		$("#create_comment_input").val("");
+	}
+
+
+
+	
+	function bindEvents() {
+
+		$(".input_comment").on("keypress",function(e){
+			e.stopImmediatePropagation();
+		if (e.keyCode == 13) {
+			addComment();
+			}
+
+		})
+
+		$(".delete").on("click",function(e){
+			deleteComment(parseInt($(this).attr('data-id')));
+		})
+
+		$(".fa-thumbs-up").on("click",function(e) { 
+			if (!($(this).hasClass('liked'))) {
+				addReaction(parseInt($(this).attr('data-id')));
+			}
+		})
+
+	}
+
+
+	bindEvents();
+	
+
+
+
+})();
+</script>
+<!-- <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/73.jpg"> -->

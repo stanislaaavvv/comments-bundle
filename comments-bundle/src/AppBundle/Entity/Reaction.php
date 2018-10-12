@@ -5,42 +5,49 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * Reaction
+ *
  * @ORM\Table(name="comments_has_reactions")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ReactionRepository")
  */
 class Reaction
 {
     /**
-     * @ORM\Column(type="integer")
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @var int
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text")
      * @var string
+     *
+     * @ORM\Column(name="type", type="text", precision=0, scale=0, nullable=false, unique=false)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
     private $userId;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="comment_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
     private $commentId;
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -88,7 +95,7 @@ class Reaction
     /**
      * Get userId
      *
-     * @return int
+     * @return integer
      */
     public function getUserId()
     {
@@ -112,11 +119,10 @@ class Reaction
     /**
      * Get commentId
      *
-     * @return int
+     * @return integer
      */
     public function getCommentId()
     {
         return $this->commentId;
     }
 }
-
