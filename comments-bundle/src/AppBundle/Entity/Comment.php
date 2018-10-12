@@ -54,6 +54,11 @@ class Comment
      */
     private $updated;
 
+     /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $replyToId;
 
     /**
      * Get id

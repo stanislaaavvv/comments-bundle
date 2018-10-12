@@ -3,228 +3,132 @@
 <!-- comments container -->
 <head>
   <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-
 </head>
-		<div class="comment_block">
+<div class="comment_block">
 
-		<!-- 
-			Comments are structured in the following way:
+<!-- 
+	Comments are structured in the following way:
 
-			{ul} defines a new comment (singular)
-			{li} defines a new reply to the comment {ul}
+	{ul} defines a new comment (singular)
+	{li} defines a new reply to the comment {ul}
 
-			example:
+	example:
 
-			<ul>
-				<comment>
-					
-				</comment
+	<ul>
+		<comment>
+			
+		</comment
 
-					<li>
-						<reply>
+			<li>
+				<reply>
 
-						</reply>
-					</li>
+				</reply>
+			</li>
 
-					<li>
-						<reply>
+			<li>
+				<reply>
 
-						</reply>
-					</li>
+				</reply>
+			</li>
 
-					<li>
-						<reply>
+			<li>
+				<reply>
 
-						</reply>
-					</li>
-			</ul>
+				</reply>
+			</li>
+	</ul>
 
-		 -->
+ -->
 
-		 <!-- used by #{user} to create a new comment -->
-		 <div class="create_new_comment">
+ <!-- used by #{user} to create a new comment -->
+ <div class="create_new_comment">
 
-			<!-- current #{user} avatar -->
+	<!-- current #{user} avatar -->
+ 	<div class="user_avatar">
+ 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/73.jpg">
+ 	</div><!-- the input field --><div class="input_comment">
+ 		<input type="text" placeholder="Join the conversation..">
+ 	</div>
+
+ </div>
+
+
+ <!-- new comment -->
+ <div class="new_comment">
+
+	<!-- build comment -->
+ 	<ul class="user_comment">
+
+ 		<!-- current #{user} avatar -->
+	 	<div class="user_avatar">
+	 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg">
+	 	</div><!-- the comment body --><div class="comment_body">
+	 		<p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
+	 	</div>
+
+	 	<!-- comments toolbar -->
+	 	<div class="comment_toolbar">
+
+	 		<!-- inc. date and time -->
+	 		<div class="comment_details">
+	 			<ul>
+	 				<li><i class="fa fa-clock-o"></i> 13:94</li>
+	 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
+	 				<li><i class="fa fa-pencil"></i> <span class="user">John Smith</span></li>
+	 			</ul>
+	 		</div><!-- inc. share/reply and love --><div class="comment_tools">
+	 			<ul>
+	 			
+	 				<li><i class="fa fa-edit fa-2x"></i></li>
+	 				<li><i class="fa fa-trash fa-2x"></i></li>
+	 				<li><i class="fa fa-reply fa-2x"></i></li>
+	 				<li><i class="fa fa-thumbs-up fa-2x"></i></li>
+	 			</ul>
+	 		</div>
+
+	 	</div>
+
+	 	<!-- start user replies -->
+	 	<li class="reply_body">
+	 		
+	 		<!-- current #{user} avatar -->
 		 	<div class="user_avatar">
-		 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/73.jpg">
-		 	</div><!-- the input field --><div class="input_comment">
-		 		<input type="text" placeholder="Join the conversation..">
+		 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/manugamero/73.jpg">
+		 	</div><!-- the comment body --><div class="comment_body">
+		 		<p>That's exactly what I was thinking!</p>
 		 	</div>
 
-		 </div>
+		 	<!-- comments toolbar -->
+		 	<div class="comment_toolbar">
+
+		 		<!-- inc. date and time -->
+		 		<div class="comment_details">
+		 			<ul>
+		 				<li><i class="fa fa-clock-o"></i> 14:52</li>
+		 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
+		 				<li><i class="fa fa-pencil"></i> <span class="user">Andrew Johnson</span></li>
+		 			</ul>
+		 		</div><!-- inc. share/reply and love --><div class="comment_tools">
+		 			<ul>
+		 				<li><i class="fa fa-share-alt"></i></li>
+		 				<li><i class="fa fa-reply"></i></li>
+		 				<li><i class="fa fa-heart love"><span class="love_amt"> 4</span></i></li>
+		 			</ul>
+		 		</div>
+
+		 	</div>
 
 
-		 <!-- new comment -->
-		 <div class="new_comment">
+	 	</li>
 
-			<!-- build comment -->
-		 	<ul class="user_comment">
+ 	
 
-		 		<!-- current #{user} avatar -->
-			 	<div class="user_avatar">
-			 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg">
-			 	</div><!-- the comment body --><div class="comment_body">
-			 		<p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
-			 	</div>
+ 	</ul>
 
-			 	<!-- comments toolbar -->
-			 	<div class="comment_toolbar">
-
-			 		<!-- inc. date and time -->
-			 		<div class="comment_details">
-			 			<ul>
-			 				<li><i class="fa fa-clock-o"></i> 13:94</li>
-			 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
-			 				<li><i class="fa fa-pencil"></i> <span class="user">John Smith</span></li>
-			 			</ul>
-			 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-			 			<ul>
-			 				<li><i class="fa fa-share-alt"></i></li>
-			 				<li><i class="fa fa-reply"></i></li>
-			 				<li><i class="fa fa-heart love"></i></li>
-			 			</ul>
-			 		</div>
-
-			 	</div>
-
-			 	<!-- start user replies -->
-		 	<li>
-		 		
-		 		<!-- current #{user} avatar -->
-			 	<div class="user_avatar">
-			 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/manugamero/73.jpg">
-			 	</div><!-- the comment body --><div class="comment_body">
-			 		<p><div class="replied_to"><p><span class="user">John Smith:</span>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p></div>That's exactly what I was thinking!</p>
-			 	</div>
-
-			 	<!-- comments toolbar -->
-			 	<div class="comment_toolbar">
-
-			 		<!-- inc. date and time -->
-			 		<div class="comment_details">
-			 			<ul>
-			 				<li><i class="fa fa-clock-o"></i> 14:52</li>
-			 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
-			 				<li><i class="fa fa-pencil"></i> <span class="user">Andrew Johnson</span></li>
-			 			</ul>
-			 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-			 			<ul>
-			 				<li><i class="fa fa-share-alt"></i></li>
-			 				<li><i class="fa fa-reply"></i></li>
-			 				<li><i class="fa fa-heart love"><span class="love_amt"> 4</span></i></li>
-			 			</ul>
-			 		</div>
-
-			 	</div>
+ </div>
 
 
-		 	</li>
+	 		<!-- <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/73.jpg"> -->
+	 
 
-		 		<!-- start user replies -->
-		 	<li>
-		 		
-		 		<!-- current #{user} avatar -->
-			 	<div class="user_avatar">
-			 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/73.jpg">
-			 	</div><!-- the comment body --><div class="comment_body">
-			 		<p><div class="replied_to"><p><span class="user">John Smith:</span>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p></div>Finally someone who actually gets it!<div class="replied_to"><p><span class="user">Andrew Johnson:</span>That's exactly what I was thinking!</p></div>That's awesome!</p>
-			 	</div>
-
-			 	<!-- comments toolbar -->
-			 	<div class="comment_toolbar">
-
-			 		<!-- inc. date and time -->
-			 		<div class="comment_details">
-			 			<ul>
-			 				<li><i class="fa fa-clock-o"></i> 14:59</li>
-			 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
-			 				<li><i class="fa fa-pencil"></i> <span class="user">Simon Gregor</span></li>
-			 			</ul>
-			 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-			 			<ul>
-			 				<li><i class="fa fa-share-alt"></i></li>
-			 				<li><i class="fa fa-reply"></i></li>
-			 				<li><i class="fa fa-heart love"><span class="love_amt"> 4039</span></i></li>
-			 			</ul>
-			 		</div>
-
-			 	</div>
-
-
-		 	</li>
-
-		 	</ul>
-
-		 </div>
-
-<!-- new comment -->
-		 <div class="new_comment">
-
-			<!-- build comment -->
-		 	<ul class="user_comment">
-
-		 		<!-- current #{user} avatar -->
-			 	<div class="user_avatar">
-			 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/73.jpg">
-			 	</div><!-- the comment body --><div class="comment_body">
-			 		<p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
-			 	</div>
-
-			 	<!-- comments toolbar -->
-			 	<div class="comment_toolbar">
-
-			 		<!-- inc. date and time -->
-			 		<div class="comment_details">
-			 			<ul>
-			 				<li><i class="fa fa-clock-o"></i> 13:94</li>
-			 				<li><i class="fa fa-calendar"></i> 04/01/2015</li>
-			 				<li><i class="fa fa-pencil"></i> <span class="user">Sarah Walkman</span></li>
-			 			</ul>
-			 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-			 			<ul>
-			 				<li><i class="fa fa-share-alt"></i></li>
-			 				<li><i class="fa fa-reply"></i></li>
-			 				<li><i class="fa fa-heart love"></i></li>
-			 			</ul>
-			 		</div>
-
-			 	</div>
-
-			 	<!-- start user replies -->
-		 	<li>
-		 		
-		 		<!-- current #{user} avatar -->
-			 	<div class="user_avatar">
-			 		<img src="https://s3.amazonaws.com/uifaces/faces/twitter/cbillins/73.jpg">
-			 	</div><!-- the comment body --><div class="comment_body">
-			 		<p><div class="replied_to"><p><span class="user">Sarah Walkman:</span>Pork belly migas flexitarian messenger bag Brooklyn gluten-free. Tilde kitsch skateboard Helvetica, lumbersexual four loko direct trade pour-over. Cronut deep v keffiyeh cornhole food truck</p></div>I'm tired, does anybody know a good place to buy extra strength coffee?</p>
-			 	</div>
-
-			 	<!-- comments toolbar -->
-			 	<div class="comment_toolbar">
-
-			 		<!-- inc. date and time -->
-			 		<div class="comment_details">
-			 			<ul>
-			 				<li><i class="fa fa-clock-o"></i> 19:23</li>
-			 				<li><i class="fa fa-calendar"></i> 14/01/2015</li>
-			 				<li><i class="fa fa-pencil"></i> <span class="user">Blake Anderson</span></li>
-			 			</ul>
-			 		</div><!-- inc. share/reply and love --><div class="comment_tools">
-			 			<ul>
-			 				<li><i class="fa fa-share-alt"></i></li>
-			 				<li><i class="fa fa-reply"></i></li>
-			 				<li><i class="fa fa-heart love"><span class="love_amt"> 12</span></i></li>
-			 			</ul>
-			 		</div>
-
-			 	</div>
-
-
-		 	</li>
-
-		 	</ul>
-
-		 </div>
-
-		</div>
+</div>

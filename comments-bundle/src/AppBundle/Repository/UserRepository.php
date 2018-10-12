@@ -1,6 +1,9 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * UserRepository
@@ -9,5 +12,45 @@ namespace AppBundle\Repository;
  * repository methods below.
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
-{
+{	
+
+
+	/**
+	 * find if default user is created
+	 * return_type = boolean
+	 */
+	public function findDefaultUser() {
+
+		$user_list = $this->getEntityManager()
+		             ->createQuery(
+		                'SELECT users.id FROM AppBundle:User users WHERE users.name = :name'
+		             )
+		             ->setParameter('name','You')
+		             ->getResult();
+		
+		$user_list = (count($user_list) > 0) ? true : false;
+
+		return $user_list;
+
+	}
+
+	public function fetchDefaultUserId() {
+
+		return $this->getEntityManager()
+            ->createQuery(
+                'SELECT users.id FROM AppBundle:User users WHERE users.name = :name '
+            )
+            ->setParameter('name','You')
+            ->setMaxResults(1)
+            ->getResult();
+
+	}
+
+	public function createDefaultUser() {
+
+		$insert_query  = 'INSERT INTO users (name) VALUES ("You")';
+		$statement     = $this->getEntityManager()->getConnection()->prepare($insert_query);
+		$statement->execute();
+
+	}
 }

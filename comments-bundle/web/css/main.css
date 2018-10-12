@@ -110,13 +110,13 @@ body {
 .comment_block .new_comment .comment_toolbar .comment_details {
   display: inline-block;
   vertical-align: middle;
-  width: 70%;
+  width: 60%;
   text-align: left;
 }
 .comment_block .new_comment .comment_toolbar .comment_tools {
   display: inline-block;
   vertical-align: middle;
-  width: 30%;
+  width: 40%;
   text-align: right;
 }
 .comment_block .new_comment .comment_toolbar .comment_tools li:hover {
@@ -128,4 +128,9 @@ body {
 }
 .comment_block .new_comment .love:hover {
   color: #ff6347;
+}
+
+.reply_body {
+	width:70%;
+	margin-left:30%;
 }
