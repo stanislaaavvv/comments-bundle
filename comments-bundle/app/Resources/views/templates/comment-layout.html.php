@@ -22,7 +22,7 @@
 	 			
 	 				<li><i class="fa fa-edit fa-2x edit  <?php dumpInfo($class_for_edit) ?>" data-id=<?php dumpInfo($comment_id) ?>></i></li>
 	 				<li><i class="fa fa-trash fa-2x delete <?php dumpInfo($class_for_delete) ?>" data-id=<?php dumpInfo($comment_id) ?>></i></li>
-	 				<li><i class="fa fa-reply fa-2x"></i></li>
+	 				<li><i class="fa fa-reply fa-2x" data-id=<?php dumpInfo($comment_id) ?>></i></li>
 	 				<li><i class="fa fa-thumbs-up fa-2x <?php dumpInfo($class_for_reaction) ?>"  data-id=<?php dumpInfo($comment_id) ?>></i></li>
 	 			</ul>
 	 		</div>

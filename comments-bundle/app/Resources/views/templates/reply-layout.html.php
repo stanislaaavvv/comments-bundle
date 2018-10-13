@@ -1,4 +1,4 @@
-<?php function dumpText($data) { echo $data; }?>
+<?php if (!function_exists('dumpText')) { function dumpText($data) { echo $data; }}?>
 <li class="reply_body" id=<?php dumpText($comment_id);?> replicable-to-id=<?php dumpText($id_to_reply);?>>
 	 		
 	<!-- current #{user} avatar -->
@@ -17,14 +17,15 @@
 				<li><i class="fa fa-calendar"></i> <?php dumpText($created);?></li>
 				<li><i class="fa fa-pencil"></i> <span class="user"> <?php dumpText($creator_name);?></span></li>
 			</ul>
-		</div><!-- inc. share/reply and love --><div class="comment_tools">
-		<ul>
-		
-			<li><i class="fa fa-edit fa-2x  <?php dumpText($class_for_edit) ?>" data-id=<?php dumpText($comment_id) ?>></i></li>
-			<li><i class="fa fa-trash fa-2x <?php dumpText($class_for_delete) ?>" data-id=<?php dumpText($comment_id) ?>></i></li>
-			<li><i class="fa fa-thumbs-up fa-2x <?php dumpText($class_for_reaction) ?>"  data-id=<?php dumpText($comment_id) ?>></i></li>
-		</ul>
-	</div>
+		</div><!-- inc. share/reply and love -->
+		<div class="comment_tools">
+			<ul>
+			
+				<li><i class="fa fa-edit fa-2x  <?php dumpText($class_for_edit) ?>" data-id=<?php dumpText($comment_id) ?>></i></li>
+				<li><i class="fa fa-trash fa-2x delete <?php dumpText($class_for_delete) ?>" data-id=<?php dumpText($comment_id) ?>></i></li>
+				<li><i class="fa fa-thumbs-up fa-2x <?php dumpText($class_for_reaction) ?>"  data-id=<?php dumpText($comment_id) ?>></i></li>
+			</ul>
+		</div>
 
 
 	</div>

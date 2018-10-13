@@ -21,7 +21,7 @@
 
 
 	 
-	 <div class="new_comment">
+	 <div class="new_comment" data-offset="5">
 		<?php dumpData($comments)?>
 	 </div>
 
@@ -45,15 +45,19 @@
 		$.ajax({
 		  url: "add/comment/"+content,
 		}).done(function(data) {
+			$('.new_comment').attr("data-offset","99999");
 		  	reloadComments();
+
 		});
 	}
 
 	function reloadComments() {
 
+		var offset = $('.new_comment').attr("data-offset")
+
 		$.ajax({
-		  url: "comments/reload",
-		}).done(function(data) {
+		  url: "comments/reload/"+offset,
+		}).done(function(data) { 
 			
 			$('.new_comment').empty();
 			$('.new_comment').append(data);
@@ -61,6 +65,9 @@
 		  	bindEvents();
 		});
 	}
+
+	
+
 
 	function deleteComment(comment_id) {
 
@@ -85,6 +92,40 @@
 
 	}
 
+	function editComment(comment_id,content) {
+
+		if (comment_id < 0) {
+			return;
+		}
+
+		if (content == "") {
+			return;
+		}
+
+		$.ajax({
+		  url: "edit/comment/"+comment_id+"/"+content,
+		}).done(function(data) { 
+		  	reloadComments();
+		});
+	}
+
+	function addReply(content,reply_to_id) {
+
+		if (reply_to_id < 0) {
+			return;
+		}
+
+		if (content == "") {
+			return;
+		}
+
+		$.ajax({
+		  url: "reply/"+content+"/"+reply_to_id,
+		}).done(function(data) { 
+		  	reloadComments();
+		});
+	}
+
 
 	function clearAddInput() {
 		$("#create_comment_input").val("");
@@ -97,8 +138,8 @@
 
 		$(".input_comment").on("keypress",function(e){
 			e.stopImmediatePropagation();
-		if (e.keyCode == 13) {
-			addComment();
+			if (e.keyCode == 13) {
+				addComment();
 			}
 
 		})
@@ -113,8 +154,77 @@
 			}
 		})
 
+		$(".fa-edit").on("click",function(e){
+
+			var comment_id = $(this).attr('data-id');
+			var p          = $("#" + comment_id + "> .comment_body > p");
+
+			$("p[contenteditable='true']").removeAttr('contenteditable');
+			$(".editable").removeClass("editable");
+			p.attr("contenteditable","true");
+			p.focus();
+			p.parent(".comment_body").addClass("editable");
+
+			$(".editable").on("keypress",function(e){
+				e.stopImmediatePropagation();
+				if (e.keyCode == 13) {
+					var comment_id = parseInt($(this).parent('.user_comment').attr("id"));
+					if (isNaN(comment_id)) {
+						comment_id = parseInt($(this).parent('.reply_body').attr("id"));
+					}
+					var content    = $(this).children('p').html();
+					
+					editComment(comment_id,content);
+				}
+
+			})
+		})
+
+		$(".fa-reply").on("click",function(e) {
+
+			if ($("#reply_now").length != 0) {
+				return;
+			}
+
+			var main_comment = $(this).closest('.user_comment');
+			var reply_html   = '<li id="reply_now" class="reply_body"><div class="user_avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/manugamero/73.jpg"></div><div class="comment_body"><p class="reply_text" data-id="'+ main_comment.attr("id")+'"contenteditable="true"></p></div></li>';
+			
+			main_comment.append(reply_html);
+			$(".reply_text").focus();
+
+			$(".reply_text").on("keypress",function(e){
+				e.stopImmediatePropagation();
+				if (e.keyCode == 13) {
+					var comment_id = parseInt($(this).attr('data-id'));
+					var content    = $(this).html();
+					addReply(content,comment_id);
+				}
+
+			})
+			
+		})
+
+		
+
+
 	}
 
+
+	$(window).on("scroll", function(e) {
+		var scrollHeight   = $(document).height();
+		var scrollPosition = $(window).height() + $(window).scrollTop();
+		
+		if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+			
+			if (parseInt($('.user_comment').length) == parseInt($('.new_comment').attr("data-offset"))) {
+				var newoffset      = parseInt($('.new_comment').attr("data-offset")) + 5;
+			    $('.new_comment').attr("data-offset",newoffset.toString());
+			    reloadComments();
+			}
+			
+		   
+		}
+	});
 
 	bindEvents();
 	

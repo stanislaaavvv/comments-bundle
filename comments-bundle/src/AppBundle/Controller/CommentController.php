@@ -30,13 +30,13 @@ class CommentController extends Controller
     }
 
      /**
-     * @Route ("/comments/reload")
+     * @Route ("/comments/reload/{offset}")
      * @Template(engine="php")
      */
-    public function reloadComments() {
+    public function reloadComments($offset = 5) {
 
         //return $this->fetchAllComments();
-        $comments_ids  = $this->fetchAllComments();
+        $comments_ids  = $this->fetchAllComments($offset);
         $comments_html = $this->processComments($comments_ids);
 
         return new Response($comments_html);
@@ -60,9 +60,9 @@ class CommentController extends Controller
 
     }
 
-    public function fetchAllComments() {
+    public function fetchAllComments($offset = 5) {
 
-        return $this->getDoctrine()->getRepository(Comment::class)->fetchActiveComments();
+        return $this->getDoctrine()->getRepository(Comment::class)->fetchActiveComments($offset);
 
     }
 
@@ -106,7 +106,7 @@ class CommentController extends Controller
                         $class_for_reaction = "";
                     }
 
-                    $replies_html .= $this->render('templates/reply-layout.html.php',array("comment_id" => $reply_comment->getId(),"id_to_reply" => $current_comment->getReplyToId(),"comment_body" => $reply_comment->getContent(),"created" => $reply_comment->getCreated()->format('Y-m-d H:i:s'),"creator_name" => $creator_name,"class_for_edit" => $class_for_edit,"class_for_delete" => $class_for_delete,"class_for_reaction" => $class_for_reaction))->getContent();
+                    $replies_html .= $this->render('templates/reply-layout.html.php',array("comment_id" => $reply_comment->getId(),"id_to_reply" => $reply_comment->getReplyToId(),"comment_body" => $reply_comment->getContent(),"created" => $reply_comment->getCreated()->format('Y-m-d H:i:s'),"creator_name" => $creator_name,"class_for_edit" => $class_for_edit,"class_for_delete" => $class_for_delete,"class_for_reaction" => $class_for_reaction))->getContent();
                 }
 
             }
@@ -169,6 +169,9 @@ class CommentController extends Controller
         return new Response($response);
     }
 
+    /**
+     * @Route ("/reply/{content}/{reply_to_id}")
+     */
     public function addReply($content,$reply_to_id) {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -197,8 +200,10 @@ class CommentController extends Controller
         return new Response($response);
 
     }
-
-    public function editComment($content,$comment_id) {
+     /**
+     * @Route ("/edit/comment/{comment_id}/{content}")
+     */
+    public function editComment($comment_id,$content) {
 
         $entityManager = $this->getDoctrine()->getManager();
         $comment       = $this->getDoctrine()->getRepository(Comment::class)->find($comment_id);
@@ -270,4 +275,5 @@ class CommentController extends Controller
         return new Response($response);
        
     }
+
 }

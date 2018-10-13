@@ -142,3 +142,16 @@ body {
 .liked {
 	color: black;
 }
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+.editable {
+	border: 1px solid #5e5767 !important;
+    border-radius: 5px;
+}
+
+#reply_now {
+	margin-bottom: 20px
+}

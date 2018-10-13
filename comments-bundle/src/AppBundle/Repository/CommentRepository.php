@@ -12,7 +12,7 @@ use AppBundle\Entity\Comment;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function fetchActiveComments() {
+	public function fetchActiveComments($offset) {
 
 		$comments_list = $this->getEntityManager()
 		             ->createQuery(
@@ -20,6 +20,7 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
 		             )
 		             ->setParameter('active',1)
 		             ->setParameter('rpl_to_id',-1)
+		             ->setMaxResults($offset)
 		             ->getResult();
 
 		return $comments_list;
@@ -56,7 +57,7 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function commentIsLiked($user_id,$comment_id) {
-    	
+
     	$reaction_list = $this->getEntityManager()
 		             ->createQuery(
 		                'SELECT reaction.id FROM AppBundle:Reaction reaction WHERE reaction.userId = :user_id AND reaction.commentId = :comment_id
