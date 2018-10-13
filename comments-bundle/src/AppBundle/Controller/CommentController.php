@@ -30,7 +30,7 @@ class CommentController extends Controller
     }
 
      /**
-     * @Route ("/comments/reload/{offset}")
+     * @Route ("/comments/reload/{offset}", options={"expose"=true},name = "route_reload")
      * @Template(engine="php")
      */
     public function reloadComments($offset = 5) {
@@ -139,7 +139,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route ("/add/comment/{content}")
+     * @Route ("/add/comment/{content}", options={"expose"=true},name = "route_add")
      */
     public function addComment($content) {
 
@@ -170,7 +170,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route ("/reply/{content}/{reply_to_id}")
+     * @Route ("/reply/{content}/{reply_to_id}", options={"expose"=true},name = "route_reply")
      */
     public function addReply($content,$reply_to_id) {
 
@@ -201,7 +201,7 @@ class CommentController extends Controller
 
     }
      /**
-     * @Route ("/edit/comment/{comment_id}/{content}")
+     * @Route ("/edit/comment/{comment_id}/{content}", options={"expose"=true},name = "route_edit"))
      */
     public function editComment($comment_id,$content) {
 
@@ -226,7 +226,7 @@ class CommentController extends Controller
         return new Response($response);
     }
     /**
-     * @Route ("/delete/comment/{comment_id}")
+     * @Route ("/delete/comment/{comment_id}", options={"expose"=true},name = "route_delete")
      */
     public function deleteComment($comment_id) {
 
@@ -250,7 +250,7 @@ class CommentController extends Controller
        
     }
     /**
-     * @Route ("/add/reaction/{comment_id}")
+     * @Route ("/add/reaction/{comment_id}", options={"expose"=true},name = "route_reaction"))
      */
     public function addReaction($comment_id,$type = "like") {
 

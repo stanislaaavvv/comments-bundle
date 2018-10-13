@@ -5,6 +5,16 @@
 <head>
   <link rel="stylesheet" href="<?php dumpData($view['assets']->getUrl('css/main.css'))?>" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="<?php echo $view['assets']->getUrl('bundles/fosjsrouting/js/router.js') ?>"></script>
+  <script src="<?php echo $view['router']->generate('fos_js_routing_js', array('callback' => 'fos.Router.setData')) ?>">
+  	//js_routing_bundle 
+	const routes = require('../../web/js/fos_js_routes.json');
+	import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+	Routing.setRoutingData(routes);
+	Routing.generate('rep_log_list');
+  </script>
+
 </head>
 <div class="comment_block">
 
@@ -41,7 +51,7 @@
 		if (content == "") {
 			return;
 		}
-
+		Routing.generate('route_add', { content : content});
 		$.ajax({
 		  url: "add/comment/"+content,
 		}).done(function(data) {
@@ -54,7 +64,7 @@
 	function reloadComments() {
 
 		var offset = $('.new_comment').attr("data-offset")
-
+		Routing.generate('route_reload', { offset : offset});
 		$.ajax({
 		  url: "comments/reload/"+offset,
 		}).done(function(data) { 
@@ -75,6 +85,7 @@
 			return;
 		}
 
+		Routing.generate('route_delete', { comment_id : comment_id});
 		$.ajax({
 		  url: "delete/comment/"+comment_id,
 		}).done(function(data) {
@@ -84,6 +95,7 @@
 
 	function addReaction(comment_id) {
 
+		Routing.generate('route_reaction', { comment_id : comment_id});
 		$.ajax({
 		  url: "add/reaction/"+comment_id,
 		}).done(function(data) { 
@@ -102,6 +114,7 @@
 			return;
 		}
 
+		Routing.generate('route_edit', { comment_id : comment_id , content : content });
 		$.ajax({
 		  url: "edit/comment/"+comment_id+"/"+content,
 		}).done(function(data) { 
@@ -119,6 +132,7 @@
 			return;
 		}
 
+		Routing.generate('route_reply', { content : content , reply_to_id : reply_to_id });
 		$.ajax({
 		  url: "reply/"+content+"/"+reply_to_id,
 		}).done(function(data) { 
